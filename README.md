@@ -348,18 +348,3 @@ training sample (their shifted values remain inside the baseline's outer bins).
   drift are not detected.
 
 ---
-
-## Acknowledgements / references
-
-The following public repositories were used **for design inspiration only** — to
-learn common patterns for serving, testing, drift detection and logging. No code,
-text or file layout was copied; all code in this repository is original. If you
-reuse any of them directly, check their individual licences first.
-
-| Component | Reference repo | Pattern learned |
-|---|---|---|
-| Serving on AWS | [anandsant12/student-placement-prediction-aws](https://github.com/anandsant12/student-placement-prediction-aws) | sklearn pipeline served by FastAPI in Docker on EC2; model in a private versioned S3 bucket downloaded at startup; `/health` reports version |
-| Tests and CI | [AdebanjiAdelowo/prediction-api](https://github.com/AdebanjiAdelowo/prediction-api) | `/predict` + `/health` structure; GitHub Actions pytest on push |
-| Drift and dashboard | [RahulBijarnia1/ml-model-monitoring-drift-detection](https://github.com/RahulBijarnia1/ml-model-monitoring-drift-detection) | per-feature KS + PSI vs. training data; Streamlit dashboard; compose for API + dashboard |
-| PostgreSQL logging | [stackSentinel-32/fraud-stream](https://github.com/stackSentinel-32/fraud-stream) | FastAPI writes predictions to PostgreSQL; Streamlit reads from it |
-| Optional extras | [umer-78/ml-model-serving-api](https://github.com/umer-78/ml-model-serving-api), [yprashanna/MLForge](https://github.com/yprashanna/MLForge) | model versioning/rollback + input validation; "overall drift if >20% of features drift" rule |
