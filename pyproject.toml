@@ -1,0 +1,26 @@
+[project]
+name = "ml-serving-drift-platform"
+version = "1.0.0"
+description = "Production ML model serving API with data drift monitoring dashboard."
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [".venv", "models", "__pycache__"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "SIM"]
+ignore = ["B008"]  # FastAPI Depends() in default args is idiomatic
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.coverage.run]
+source = ["app", "pipeline", "monitoring"]
+omit = ["monitoring/dashboard.py"]

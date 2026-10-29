@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+*.pem
+*.key
+aws_credentials
+
+# ML artifacts
+models/
+*.joblib
+!tests/fixtures/*.joblib
+
+# Databases / local data
+*.db
+*.sqlite3
+data/*.csv
+data/*.parquet
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+site/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Docker
+postgres_data/

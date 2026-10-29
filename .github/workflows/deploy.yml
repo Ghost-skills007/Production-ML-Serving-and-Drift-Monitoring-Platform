@@ -1,0 +1,23 @@
+name: Deploy to EC2
+
+# Manual-only deployment. Requires GitHub Secrets:
+#   EC2_HOST, EC2_USER, SSH_PRIVATE_KEY, and optionally DEPLOY_PATH.
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH to EC2 and redeploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            cd ${DEPLOY_PATH:-~/ml-serving-drift-platform}
+            git pull --ff-only
+            docker compose pull || true
+            docker compose up -d --build
